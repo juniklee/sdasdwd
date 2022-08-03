@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin-top: 30%;
+        }
+    </style>
+</head>
+<body>
+    <button id="start">음성인식 시작</button>
+    <button id="stop">음성인식 종료</button>
+
+
+
+    <script>
+         const condition = true;
+
+        // const speech = new webkitSpeechRecognition;
+        if(!("webkitSpeechRecognition" in window)){
+            alert("현재 브라우저에서는 Speech 지원이 불가능합니다 Chome 브라우저로 실행하세요.");
+        } else {
+            const speech = new window.webkitSpeechRecognition;
+
+            document.getElementById("start").addEventListener("click", () => {
+                speech.start();
+            })
+            document.getElementById("stop").addEventListener("click", () => {
+                speech.stop();
+            })
+
+            speech.addEventListener("result",(event) =>{
+                // console.log(event);
+                const {transcript} = event["results"][0][0];
+                console.log(transcript);
+                if(transcript == "화장실"){
+                    window.location.href = "https://juniklee.github.io/yeso-b/html/index_expoC.html"
+                }
+
+            })
+        }
+    </script>
+</body>
+</html>
